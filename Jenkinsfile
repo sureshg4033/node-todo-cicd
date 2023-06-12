@@ -8,16 +8,8 @@ pipeline{
         }
         stage('build and test' ){
             steps{
-              sh 'docker build . -t shubhamdhyani/node-todo-cicd-app:latest'
+              sh 'docker build . -t sureshg4033/node-todo-cicd-app:latest'
             }
-        }
-        stage('login & push' ){
-           steps{
-                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        	     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-        	     sh 'docker push shubhamdhyani/node-todo-cicd-app:latest'
-               }
-               }
         }
        stage('deploy'){
             steps{
